@@ -113,6 +113,16 @@ export default class Equalizer extends React.Component {
         }
     }
 
+    squarerooo(){
+        this.setState((state) =>{
+            return{
+                equals: Math.pow(this.state.addend1,0.5)
+            }
+        })
+    
+    }
+
+
 render(){
     return (
         <fragment>
@@ -120,69 +130,73 @@ render(){
             <div className = 'row'>
             <button className = 'col'onClick={()=> this.chagee(0)}>
                     Clear</button>
+            
+            
             </div>
             <div className = 'row'>
+            <button className = 'col'onClick={()=> this.squarerooo()}>
+            √</button>
             <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(7)}>
                     7
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(8)}>
                     8
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(9)}>
                     9
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.operation('/')}>
                     /
                 </button>
             </div>
             <div className = 'row'>
             <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(4)}>
                     4
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(5)}>
                     5
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(6)}>
                     6
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.operation('*')}>
                     *
                 </button>
             </div>
             <div className = 'row'>
             <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(1)}>
                     1
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(2)}>
                     2
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(3)}>
                     3
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 
                 onClick={()=> this.operation('-')}>
                     -
@@ -190,17 +204,17 @@ render(){
                 
             </div>
             <div className = 'row'>
-            <button className = "col-6"
+            <button className = "col"
             onClick={()=>this.eequals()}
             >Enter</button>
            
             <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.chage(0)}>
                     0
                 </button>
                 <button 
-                className= "col-3"
+                className= "col"
                 onClick={()=> this.operation('+')}>
                     +
                 </button>
