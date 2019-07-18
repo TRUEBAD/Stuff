@@ -5,11 +5,14 @@ export default class Equalizer extends React.Component {
         super(props);
         this.state = {
             addend1: 0,
-            addend2: 0,
+            addend2: null,
             equals: null,
             sign: '',
-            
-              
+            sign2: '',
+            decimal1: false,
+            decimal2: false,
+            yes:false
+             
         }
         this.chage = this.chage.bind(this)
         this.chagee = this.chagee.bind(this)
@@ -19,18 +22,21 @@ export default class Equalizer extends React.Component {
     }
 
     chage(feel){
-        if (this.state.equals !== null){
+        if (this.state.yes === true){
             this.setState((state) => {
                 return{
-                    equals:null
+                    equals:null,
+                    yes: false,
+                    addend1: 0
                 }
             })
         }
-        if (this.state.sign === '' ){
+        
+        if (this.state.sign === '' || this.state.yes === true){
             this.setState((state) => {
             return {
               addend1: (state.addend1*=10)+feel,
-              
+              yes: false
             }
           })}
         else(this.setState((state) => {
@@ -43,85 +49,281 @@ export default class Equalizer extends React.Component {
     chagee(feel){
         this.setState(
             {addend1: feel,
-                addend2: feel,
+                addend2: null,
                 sign: '',
-                equals:null
+                equals:null,
+                sign2: '',
+                yes:false
             }
             )
     }
     operation(count){
-        this.setState((state) => {
+    
+        if (this.state.sign === ''){
+        this.setState(() => {
             return {
-              sign: count
+              sign: count,
+              yes:false
             }
           })
         }
+        else if (this.state.sign !== '' && count !== ''){
+            this.eequals(count)
+        }
+    }
 
-    eequals(){
-        if (this.state.sign === '+'){
-            this.setState((state) =>{
+    eequals(count){
+        if (this.state.sign === '+' && count === ''){
+            this.setState(() =>{
                 return{
                     equals: this.state.addend1+this.state.addend2,
-                    addend1: 0,
-                    addend2:0,
-                    sign: ''
+                    addend1:0,
+                    addend2: null,
+                    sign: '',
+                    sign2: '',
+                    yes: true
+                }
+            })    
+        }
+        else if (this.state.sign === '+' && count === '+'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1+this.state.addend2,
+                    addend2: null,
+                    sign: '+',
+                    sign2: count
                 }
             })
         }
-        else if (this.state.sign === '-'){
-            this.setState((state) =>{
+        else if (this.state.sign === '+' && count === '-'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1+this.state.addend2,
+                    addend2: null,
+                    sign: '-',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '+' && count === '*'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1+this.state.addend2,
+                    addend2: null,
+                    sign: '*',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '+' && count === '/'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1+this.state.addend2,
+                    addend2: null,
+                    sign: '/',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '-' && count === ''){
+            this.setState(() =>{
                 return{
                     equals: this.state.addend1-this.state.addend2,
-                    addend1: 0,
-                    addend2:0,
-                    sign:''
+                    addend1:0,
+                    addend2: null,
+                    sign: '',
+                    sign2: '',
+                    yes:true
+                }
+            })    
+        }
+        else if (this.state.sign === '-' && count === '+'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1-this.state.addend2,
+                    addend2: null,
+                    sign: '+',
+                    sign2: count
                 }
             })
         }
-        else if (this.state.sign === '*'){
-            this.setState((state) =>{
+        else if (this.state.sign === '-' && count === '-'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1-this.state.addend2,
+                    addend2: null,
+                    sign: '-',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '-' && count === '*'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1-this.state.addend2,
+                    addend2: null,
+                    sign: '*',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '-' && count === '/'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1-this.state.addend2,
+                    addend2: null,
+                    sign: '/',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '*' && count === ''){
+            this.setState(() =>{
                 return{
                     equals: this.state.addend1*this.state.addend2,
-                    addend1: 0,
-                    addend2:0,
-                    sign:''
+                    addend1:0,
+                    addend2: null,
+                    sign: '',
+                    sign2: '',
+                    yes:true
+                }
+            })    
+        }
+        else if (this.state.sign === '*' && count === '+'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1*this.state.addend2,
+                    addend2: null,
+                    sign: '+',
+                    sign2: count
                 }
             })
         }
-        else if (this.state.sign === '/'){
-            this.setState((state) =>{
+        else if (this.state.sign === '*' && count === '-'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1*this.state.addend2,
+                    addend2: null,
+                    sign: '-',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '*' && count === '*'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1*this.state.addend2,
+                    addend2: null,
+                    sign: '*',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '*' && count === '/'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1*this.state.addend2,
+                    addend2: null,
+                    sign: '/',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '/' && count === ''){
+            this.setState(() =>{
                 return{
                     equals: this.state.addend1/this.state.addend2,
-                    addend1: 0,
-                    addend2:0,
-                    sign:''
+                    addend1:0,
+                    addend2: null,
+                    sign: '',
+                    sign2: '',
+                    yes: true
+                }
+            })    
+        }
+        else if (this.state.sign === '/' && count === '+'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1/this.state.addend2,
+                    addend2: null,
+                    sign: '+',
+                    sign2: count
                 }
             })
         }
+        else if (this.state.sign === '/' && count === '-'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1/this.state.addend2,
+                    addend2: null,
+                    sign: '-',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '/' && count === '*'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1/this.state.addend2,
+                    addend2: null,
+                    sign: '*',
+                    sign2: count
+                }
+            })
+        }
+        else if (this.state.sign === '/' && count === '/'){
+            this.setState(() =>{
+                return{
+                    equals: this.state.addend1/this.state.addend2,
+                    addend2: null,
+                    sign: '/',
+                    sign2: count
+                }
+            })
+        }
+                }
 
-    }
     line(){
-        if(this.state.sign === '' && this.state.equals ===null){
+        if(this.state.addend2 ===  null && this.state.equals === null){
             return this.state.addend1
         }
-        else if(this.state.sign !== '' && this.state.equals ===null){
+        else if(this.state.sign !== null && this.state.equals ===null){
             return this.state.addend2
         }
         else{
-            return this.state.equals
-            
+            this.setState((state)=> {
+                return{
+                    addend1: this.state.equals,
+                    equals: null
+                }
+            })}
+            return this.state.addend1
         }
-    }
+    
 
     squarerooo(){
-        this.setState((state) =>{
+        this.setState(() =>{
             return{
                 equals: Math.pow(this.state.addend1,0.5)
             }
         })
     
     }
+    // decimal(){
+    //     if (this.state.sign === '' ){
+    //         this.setState((state) => {
+    //         return {
+    //           decimal1:true
+              
+    //         }yes
+    //       })}
+    //     else{(this.setState((state) => {
+    //         return {
+    //           decimal2:true
+    //         }
+    //       }))}
 
+    // }
 
 render(){
     return (
@@ -160,6 +362,11 @@ render(){
             <div className = 'row'>
             <button 
                 className= "col"
+                onClick={()=> this.chage( )}>
+                    TBD
+                </button>
+            <button 
+                className= "col"
                 onClick={()=> this.chage(4)}>
                     4
                 </button>
@@ -180,6 +387,11 @@ render(){
                 </button>
             </div>
             <div className = 'row'>
+            <button 
+                className= "col"
+                onClick={()=> this.chage( )}>
+                    TBD
+                </button>
             <button 
                 className= "col"
                 onClick={()=> this.chage(1)}>
@@ -205,7 +417,7 @@ render(){
             </div>
             <div className = 'row'>
             <button className = "col"
-            onClick={()=>this.eequals()}
+            onClick={()=>this.eequals('')}
             >Enter</button>
            
             <button 
@@ -213,6 +425,11 @@ render(){
                 onClick={()=> this.chage(0)}>
                     0
                 </button>
+                {/* <button 
+                className= "col"
+                onClick={()=> this.decimal()}>
+                    .
+                </button> */}
                 <button 
                 className= "col"
                 onClick={()=> this.operation('+')}>
